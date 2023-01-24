@@ -669,9 +669,6 @@
 			echo("<img src='?display=concurrentcalls&quietmode=1&ccgraph=1&graph=" . $concurrentcalls_settings["graph_type"] . "&startDate=" . $startDate . "&endDate=" . $endDate . "&maxLoad=" . $maxLoad . "&width=" . $concurrentcalls_settings["graph_width"] . "' />");
 		echo("</p>");
 	?>
-	<p id="footer">
-		<a href="https://github.com/POSSA/freepbx-Call-Statistics">Call Statistics</a> <?php echo ($version_name); ?>
-	</p>
 </body>
 
 </html>
