@@ -155,6 +155,29 @@
 		);
 	}
 
+	// query to get all PJSIP trunks
+	$SQLTrunks = "SELECT
+					`name`,`channelid`
+				FROM
+					trunks
+				WHERE
+					disabled LIKE 'off' AND
+					(
+						tech LIKE 'pjsip'
+					)
+				ORDER BY
+					trunkid";
+	$SQLTrunksRS = mysqli_query($link,$SQLTrunks)
+		or die("Failed to query the \"" . $dbConf["database"] . "\" database.");
+
+	// Add PJSIP trunks to $trunks array
+	while ($data = mysqli_fetch_array($SQLTrunksRS)) {
+		$trunks[] = array(
+			'channelid' => "PJSIP/".$data["channelid"]."-",
+			'name' => $data["name"]." (pjsip)",
+		);
+	}
+
 	// query to get all custom trunks
 	$SQLTrunks = "SELECT
 					`name`,`channelid`
@@ -211,6 +234,11 @@
 	$trunks[] = array(
 			'channelid' => "SIP/",
 			'name' => "All SIP Trunks",
+		);
+
+	$trunks[] = array(
+			'channelid' => "PJSIP/",
+			'name' => "All PJSIP Trunks",
 		);
 
 	$trunks[] = array(
